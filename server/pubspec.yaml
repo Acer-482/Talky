@@ -1,0 +1,25 @@
+name: talky_server
+description: A server app using the shelf package and Docker.
+version: 1.0.0
+publish_to: "none" # 不公开到pub.dev
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  talky_shared:
+    path: ../shared # 调用共享库
+  # WebSocket&网络通信包
+  shelf: ^1.4.2
+  shelf_web_socket: ^3.0.0
+  web_socket_channel: ^3.0.3
+
+  path: ^1.9.0 # 路径包
+  uuid: ^4.5.3 # uuid包
+  # sqlite3: ^3.2.0 # sqlite数据库包（过于原始，直接调用操作系统本地的库，且带有钩子功能。弃用）
+  # sqflite_common_ffi: ^2.4.0+2 # sqlite跨平台数据库包
+
+dev_dependencies:
+  http: ^1.2.2
+  lints: ^6.0.0
+  test: ^1.25.6

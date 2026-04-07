@@ -1,0 +1,54 @@
+Date : 2026-03-05 20:46:47
+Directory : c:\develop\dart\flutter\talky\shared
+Total : 18 files,  -1635 codes, -91 comments, -246 blanks, all -1972 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Markdown |          4 |         92 |          0 |         26 |        118 |
+| JSON     |          1 |          1 |          0 |          0 |          1 |
+| Dart     |         13 |     -1,728 |        -91 |       -272 |     -2,091 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                           | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                              |         18 |     -1,635 |        -91 |       -246 |     -1,972 |
+| .VSCodeCounter                                                                                 |          5 |         93 |          0 |         26 |        119 |
+| .VSCodeCounter\2026-03-05_20-44-34                                                             |          5 |         93 |          0 |         26 |        119 |
+| lib                                                                                            |         13 |     -1,728 |        -91 |       -272 |     -2,091 |
+| lib (Files)                                                                                    |          1 |       -160 |         -7 |        -22 |       -189 |
+| lib\account                                                                                    |          1 |       -137 |         -7 |        -22 |       -166 |
+| lib\packets                                                                                    |         11 |     -1,431 |        -77 |       -228 |     -1,736 |
+| lib\packets (Files)                                                                            |          3 |       -270 |        -21 |        -52 |       -343 |
+| lib\packets\accounts                                                                           |          4 |       -621 |        -28 |        -92 |       -741 |
+| lib\packets\getters                                                                            |          2 |       -317 |        -14 |        -46 |       -377 |
+| lib\packets\user_messages                                                                      |          2 |       -223 |        -14 |        -38 |       -275 |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                       | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\develop\dart\flutter\talky\shared\.VSCodeCounter\2026-03-05_20-44-34\details.md             | Markdown |         44 |          0 |          6 |         50 |
+| c:\develop\dart\flutter\talky\shared\.VSCodeCounter\2026-03-05_20-44-34\diff-details.md        | Markdown |          9 |          0 |          6 |         15 |
+| c:\develop\dart\flutter\talky\shared\.VSCodeCounter\2026-03-05_20-44-34\diff.md                | Markdown |         12 |          0 |          7 |         19 |
+| c:\develop\dart\flutter\talky\shared\.VSCodeCounter\2026-03-05_20-44-34\results.json           | JSON     |          1 |          0 |          0 |          1 |
+| c:\develop\dart\flutter\talky\shared\.VSCodeCounter\2026-03-05_20-44-34\results.md             | Markdown |         27 |          0 |          7 |         34 |
+| c:\develop\dart\flutter\talky\shared\lib\account\account.mapper.dart                           | Dart     |       -137 |         -7 |        -22 |       -166 |
+| c:\develop\dart\flutter\talky\shared\lib\chat_group.mapper.dart                                | Dart     |       -160 |         -7 |        -22 |       -189 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\accounts\log_in_packet.mapper.dart            | Dart     |       -130 |         -7 |        -23 |       -160 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\accounts\log_in_response_packet.mapper.dart   | Dart     |       -164 |         -7 |        -23 |       -194 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\accounts\sign_up_packet.mapper.dart           | Dart     |       -163 |         -7 |        -23 |       -193 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\accounts\sign_up_response_packet.mapper.dart  | Dart     |       -164 |         -7 |        -23 |       -194 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\base_packet.mapper.dart                       | Dart     |        -42 |         -7 |        -14 |        -63 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\getters\chat_group_response.mapper.dart       | Dart     |       -184 |         -7 |        -23 |       -214 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\getters\get_chat_group_request.mapper.dart    | Dart     |       -133 |         -7 |        -23 |       -163 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\status_response_packet.mapper.dart            | Dart     |        -77 |         -7 |        -15 |        -99 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\text_message_packet.mapper.dart               | Dart     |       -151 |         -7 |        -23 |       -181 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\user_messages\text_message_packet.mapper.dart | Dart     |       -153 |         -7 |        -23 |       -183 |
+| c:\develop\dart\flutter\talky\shared\lib\packets\user_messages\user_message_packet.mapper.dart | Dart     |        -70 |         -7 |        -15 |        -92 |
+| Total                                                                                          |          |     -1,635 |        -91 |       -246 |     -1,972 |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

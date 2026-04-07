@@ -1,0 +1,5 @@
+# Miscellaneous
+.env
+
+# Mappable
+*.mapper.dart

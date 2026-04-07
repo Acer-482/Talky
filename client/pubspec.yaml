@@ -1,0 +1,57 @@
+name: talky_client
+description: "A new Flutter project."
+publish_to: "none" # 不公开到pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  talky_shared:
+    path: ../shared
+  cupertino_icons: ^1.0.8 # ios风格图标
+  toastification: ^3.0.3 # 弹窗包
+  animated_list_plus: ^0.5.2 # 动画列表
+  flutter_colorpicker: ^1.1.0 # 颜色选择
+  flutter_smooth_markdown: ^0.7.1 # 平滑md文档
+  fl_chart: ^1.2.0 # 折线图显示
+
+  intl: ^0.20.2 # 国际化/日期格式化包
+  provider: ^6.1.5+1 # 状态管理
+  uuid: ^4.5.3 # uuid包
+
+  shared_preferences: ^2.5.4 # 跨平台配置
+  flutter_dotenv: any # API密钥管理
+
+  web_socket_channel: ^3.0.3 # WebSocket通信
+  http: ^1.6.0 # http请求
+  dart_mappable: ^4.7.0 # mappable
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  build_runner: ^2.13.0 # 构建器
+  dart_mappable_builder: ^4.7.0 # mappable构建器
+  flutter_launcher_icons: ^0.13.1 # 图标替换
+
+flutter_launcher_icons:
+  image_path: "assets/icon/icon.png" # 原始图标图片路径
+  windows:
+    generate: true # 桌面图标
+    image_path: "assets/icon/icon.png"
+  android: true # 安卓图标
+
+flutter:
+  uses-material-design: true
+  assets: # 资源文件夹
+    - assets/.env
+    - assets/data/tips.json
+    - assets/data/quotes.json
+    - assets/data/hobby_tags.json

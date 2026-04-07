@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "启动客户端 (Flutter)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "cwd": "client",
+      "flutterMode": "debug", // debug / profile / release
+      "args": [] // 传递的参数
+    },
+    {
+      "name": "启动服务端 (Dart)",
+      "type": "dart",
+      "request": "launch",
+      "program": "bin/server.dart",
+      "cwd": "server",
+      "args": [] // 传递的参数
+    }
+  ],
+  "compounds": [
+    {
+      "name": "启动客户端+服务端",
+      "configurations": [
+        "启动客户端 (Flutter)",
+        "启动服务端 (Dart)"
+      ]
+    }
+  ]
+}
