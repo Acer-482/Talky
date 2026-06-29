@@ -19,7 +19,7 @@ dependencies:
   animated_list_plus: ^0.5.2 # 动画列表
   flutter_colorpicker: ^1.1.0 # 颜色选择
   flutter_smooth_markdown: ^0.7.1 # 平滑md文档
-  fl_chart: ^1.2.0 # 折线图显示
+  fl_chart: ^1.2.0 # 图表可视化显示
 
   intl: ^0.20.2 # 国际化/日期格式化包
   provider: ^6.1.5+1 # 状态管理
