@@ -13,11 +13,11 @@ jobs:
     steps:
       # 拉取代码
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # 配置 Flutter 环境
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2.21.0
+        uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: 3.35.1
           channel: stable
@@ -56,7 +56,7 @@ jobs:
 
       # 上传 Web 产物
       - name: Upload Web Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: web-build
           path: web-build.zip
@@ -79,7 +79,7 @@ jobs:
     steps:
       # 拉取代码
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # 安装 Linux 编译依赖
       - name: Install Linux dependencies
@@ -97,7 +97,7 @@ jobs:
 
       # 配置 Flutter 环境
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2.21.0
+        uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: 3.35.1
           channel: stable
@@ -133,7 +133,7 @@ jobs:
 
       # 上传产物
       - name: Upload Desktop Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.artifact-name }}
           path: ${{ matrix.artifact-name }}.*
@@ -148,21 +148,21 @@ jobs:
     steps:
       # 下载 Web 产物
       - name: Download Web Artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: web-build
           path: artifacts/web/
 
       # 下载 Windows 桌面产物
       - name: Download Windows Artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: windows-build
           path: artifacts/desktop/windows-build/
 
       # 下载 Linux 桌面产物
       - name: Download Linux Artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: linux-build
           path: artifacts/desktop/linux-build/
@@ -181,7 +181,7 @@ jobs:
 
       # 创建 Release 并上传所有产物
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             artifacts/web/web-build.zip
@@ -205,5 +205,5 @@ jobs:
             - Web 端首次加载建议通过 Nginx 开启 gzip / brotli 压缩
             - Windows 客户端需要确保 `flutter_windows.dll` 与 exe 在同一目录
             - Linux 客户端需具备 GTK3 运行环境
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
