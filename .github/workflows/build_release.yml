@@ -19,10 +19,10 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2.23.0
         with:
-          flutter-version: 3.35.1
+          flutter-version: 3.47.6
           channel: stable
           cache: true
-          cache-key: flutter-stable-3.35.1-web
+          cache-key: flutter-stable-3.47.6-web
 
       # 安装并生成 shared 包代码
       - name: Install shared deps
@@ -99,10 +99,10 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2.23.0
         with:
-          flutter-version: 3.35.1
+          flutter-version: 3.47.6
           channel: stable
           cache: true
-          cache-key: flutter-stable-3.35.1-${{ matrix.os }}
+          cache-key: flutter-stable-3.47.6-${{ matrix.os }}
 
       # 安装并生成 shared 包代码
       - name: Install shared deps
