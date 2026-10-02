@@ -1,7 +1,6 @@
 name: talky_shared
-description: A starting point for Dart libraries or applications.
+description: Store the data model required for both sides of Talky
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
 
 environment:
   sdk: ^3.10.8

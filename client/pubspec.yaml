@@ -1,5 +1,5 @@
 name: talky_client
-description: "A new Flutter project."
+description: Talky client
 publish_to: "none" # 不公开到pub.dev
 
 version: 1.0.0+1
