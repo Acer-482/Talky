@@ -2,7 +2,7 @@ name: talky_client
 description: Talky client
 publish_to: "none" # 不公开到pub.dev
 
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ^3.10.8
