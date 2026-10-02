@@ -32,6 +32,14 @@ jobs:
       - name: Generate shared code
         working-directory: shared
         run: dart run build_runner build --delete-conflicting-outputs
+      
+      # 动态生成客户端.env文件
+      - name: Create .env file
+        working-directory: client
+        run: |
+          mkdir -p assets
+          echo "${{ secrets.CLIENT_DOTENV }}" > assets/.env
+        shell: bash
 
       # 安装并生成 client 代码
       - name: Install client deps
@@ -112,6 +120,25 @@ jobs:
       - name: Generate shared code
         working-directory: shared
         run: dart run build_runner build --delete-conflicting-outputs
+
+      # 动态生成客户端.env文件 - Linux
+      - name: Create .env file (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        working-directory: client
+        run: |
+          mkdir -p assets
+          printf '%s\n' "${{ secrets.ENV_FILE }}" > assets/.env
+
+      # 动态生成客户端.env文件 - Windows
+      - name: Create .env file (Windows)
+        if: matrix.os == 'windows-latest'
+        working-directory: client
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path assets | Out-Null
+          @"
+          ${{ secrets.ENV_FILE }}
+          "@ | Out-File -FilePath assets/.env -Encoding utf8NoBOM
 
       # 安装并生成 client 代码
       - name: Install client deps
