@@ -164,11 +164,82 @@ jobs:
         with:
           name: ${{ matrix.artifact-name }}
           path: ${{ matrix.artifact-name }}.*
+  
+  # 构建 Android 客户端
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      # 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v7
 
+      # 配置 Java 环境（Android 编译必需）
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # 配置 Flutter 环境
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2.23.0
+        with:
+          flutter-version: 3.47.6
+          channel: stable
+          cache: true
+          cache-key: flutter-stable-3.47.6-android
+
+      # 安装并生成 shared 包代码
+      - name: Install shared deps
+        working-directory: shared
+        run: flutter pub get
+
+      - name: Generate shared code
+        working-directory: shared
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      # 动态生成客户端 .env 文件
+      - name: Create .env file
+        working-directory: client
+        run: |
+          mkdir -p assets
+          echo "${{ secrets.CLIENT_DOTENV }}" > assets/.env
+        shell: bash
+
+      # 安装并生成 client 代码
+      - name: Install client deps
+        working-directory: client
+        run: flutter pub get
+
+      - name: Generate client code
+        working-directory: client
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      # 构建分架构 APK（体积更小）
+      - name: Build APK (split per ABI)
+        working-directory: client
+        run: flutter build apk --release --split-per-abi
+
+      # 构建通用 APK（含所有架构，兼容性最好）
+      - name: Build Universal APK
+        working-directory: client
+        run: flutter build apk --release
+
+      # 上传 Android 产物
+      - name: Upload Android Artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-apks
+          path: |
+            client/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+            client/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+            client/build/app/outputs/flutter-apk/app-x86_64-release.apk
+            client/build/app/outputs/flutter-apk/app-release.apk
+  
   # 创建Release & 上传产物
   create-release:
     runs-on: ubuntu-latest
-    needs: [build-web, build-desktop]
+    needs: [build-web, build-desktop, build-android]
     permissions:
       contents: write
 
@@ -194,9 +265,20 @@ jobs:
           name: linux-build
           path: artifacts/desktop/linux-build/
 
+      # 下载 Android 产物
+      - name: Download Android Artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: android-apks
+          path: artifacts/android/
+
       # 列出所有下载文件（便于排查）
       - name: List generated files
         run: |
+          echo "=== Android APKs ==="
+          find artifacts/android -type f | while read file; do
+            echo "- $(basename "$file") - $(du -h "$file" | cut -f1)"
+          done
           echo "=== Web Build ==="
           find artifacts/web -type f | while read file; do
             echo "- $(basename "$file") - $(du -h "$file" | cut -f1)"
@@ -214,10 +296,14 @@ jobs:
             artifacts/web/web-build.zip
             artifacts/desktop/windows-build/windows-build.zip
             artifacts/desktop/linux-build/linux-build.tar.gz
+            artifacts/android/app-armeabi-v7a-release.apk
+            artifacts/android/app-arm64-v8a-release.apk
+            artifacts/android/app-x86_64-release.apk
+            artifacts/android/app-release.apk
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
-            ## Talky 构建产物
+            ## Talky 构建
 
             ### 网页端
             - **web-build.zip** - 解压后部署到任意 Web 服务器（Nginx / Apache / 静态托管）
@@ -228,9 +314,15 @@ jobs:
             - **windows-build.zip** - Windows x64，解压后运行 `talky_client.exe`
             - **linux-build.tar.gz** - Linux x64，解压后运行 `talky_client`
 
+            ### Android 应用
+            - **app-armeabi-v7a-release.apk** - ARM 32 位（老旧机型）
+            - **app-arm64-v8a-release.apk** - ARM 64 位（主流机型）
+            - **app-x86_64-release.apk** - x86 64 位（模拟器 / 部分平板）
+            - **app-release.apk** - Universal
+              - 不确定设备架构时请下载该版本
+
             ### 部署提示
             - Web 端首次加载建议通过 Nginx 开启 gzip / brotli 压缩
-            - Windows 客户端需要确保 `flutter_windows.dll` 与 exe 在同一目录
             - Linux 客户端需具备 GTK3 运行环境
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
