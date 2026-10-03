@@ -215,15 +215,36 @@ jobs:
         working-directory: client
         run: dart run build_runner build --delete-conflicting-outputs
 
-      # 构建分架构 APK（体积更小）
+      # 解码 keystore
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > client/android/release-key.keystore
+
+      # 构建分架构 APK & 签名环境变量
       - name: Build APK (split per ABI)
         working-directory: client
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/client/android/release-key.keystore
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: flutter build apk --release --split-per-abi
-
-      # 构建通用 APK（含所有架构，兼容性最好）
+      
+      # 构建通用 APK
       - name: Build Universal APK
         working-directory: client
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/client/android/release-key.keystore
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: flutter build apk --release
+
+      # 验证签名
+      - name: Verify APK signature
+        run: |
+          $ANDROID_HOME/build-tools/34.0.0/apksigner verify --verbose \
+            client/build/app/outputs/flutter-apk/app-release.apk
 
       # 上传 Android 产物
       - name: Upload Android Artifacts
