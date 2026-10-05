@@ -45,7 +45,7 @@ class FeatureCard extends StatelessWidget {
               children: [
                 Text(title, textScaler: .linear(titleScaler)),
                 const Spacer(),
-                if (actions != null) ...actions!,
+                ...?actions,
               ],
             ),
             ...childrenBuilder.call(layoutMode, textScaler),
